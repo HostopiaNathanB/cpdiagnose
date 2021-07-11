@@ -7,10 +7,10 @@ free -h
 echo The current CPU usage is:
 w | head -n 1
 
-echo The Top Processes using memory are:
+echo "The Top Processes using memory are:"
 ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
 
-echo The Top Processes using CPU are:
+echo "The Top Processes using CPU are:"
 ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
 
 
