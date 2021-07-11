@@ -20,5 +20,5 @@ read -r -p "Would you like to block these IP addresses? [y/N] " response
 
 		else
 		exit
-
+fi
 
