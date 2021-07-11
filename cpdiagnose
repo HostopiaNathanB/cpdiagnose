@@ -17,7 +17,7 @@ read -r -p "Would you like to block these IP addresses? [y/N] " response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
 then
 	ip=$(grep $today /home/*/access-logs/* | egrep 'wp-login|xmlrpc' | cut -d : -f2 | awk '{print $1}' | sort | uniq -c | sort -h | awk '{if($1>100) print $2}'); for i in $ip; do csf -d $i; done; csf -r
-	else
+else
 	exit
 fi
 
