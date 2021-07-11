@@ -1,0 +1,24 @@
+#!/bin/bash
+
+today=$(date +'%d/%b/%Y')
+echo The amount of free memory is:
+free -h
+
+echo The current CPU usage is:
+w | head -n 1
+
+echo The top 5 IP addresses making POST requests are:
+grep POST /home/*/access-logs/* | awk '{print $1}' | cut -d : -f2 | sort | uniq -c | sort -n | tail -n 5
+
+echo The top 5 IP addresses attempting to access wp-login and xmlrpc today are:
+grep $today /home/*/access-logs/* | egrep 'wp-login|xmlrpc' | cut -d : -f2 | awk '{print $1}' | sort | uniq -c | sort -n | tail -n 5
+
+read -p "Would you like to block these IP's (y/n)?" choice
+case "$choice" in
+  y|Y )  ip=$(grep $today /home/*/access-logs/* | egrep 'wp-login|xmlrpc' | cut -d : -f2 | awk '{print $1}' | sort | uniq -c | sort -h | awk '{if($1>50) print $2}'); for i in $ip; do csf -d $i; done; csf -r;;
+  n|N ) echo "Continuing";;
+  * ) echo "invalid";;
+esac
+
+
+
