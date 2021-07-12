@@ -1,6 +1,11 @@
 #!/bin/bash
 
 today=$(date +'%d/%b/%Y')
+
+echo "The disk space is:"
+df -h
+echo
+
 echo The amount of free memory is:
 free -h
 echo
