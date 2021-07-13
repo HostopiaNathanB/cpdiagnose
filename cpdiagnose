@@ -19,10 +19,10 @@ free -h
 echo
 
 echo "The Top Processes using memory are:"
-ps ww -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps aux --sort=-%mem | head
 echo
 echo "The Top Processes using CPU are:"
-ps ww -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
+ps aux --sort=-%cpu | head
 echo
 
 echo "The top 5 IP addresses making POST requests are:"
