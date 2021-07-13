@@ -32,7 +32,7 @@ echo
 echo -e  " ${Green} The top 5 IP addresses attempting to access wp-login and xmlrpc today are:${NC}"
 grep $today /home/*/access-logs/* | egrep 'wp-login|xmlrpc' | cut -d : -f2 | awk '{print $1}' | sort | uniq -c | sort -n | tail -n 5
 
-read -r -p "Would you like to block these IP addresses? (please check to make sure these are not CloudFlare or Seccuri [y/N] " response
+read -r -p "Would you like to block these IP addresses? (please check to make sure these are not CloudFlare or Securi [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
 	ip=$(grep $today /home/*/access-logs/* | egrep 'wp-login|xmlrpc' | cut -d : -f2 | awk '{print $1}' | sort | uniq -c | sort -n | tail -n 5 |  awk '{if($1>100) print $2}'); for i in $ip; do csf -d $i; done; csf -r
