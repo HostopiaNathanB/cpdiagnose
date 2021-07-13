@@ -20,7 +20,7 @@ free -h
 echo
 
 echo -e  " ${Green} The Top Processes using memory are:${NC}"
-ps aux --sort=-%mem | head
+ps aux --sort -rss | head
 echo
 echo -e  " ${Green} The Top Processes using CPU are:${NC}"
 ps aux --sort=-%cpu | head
