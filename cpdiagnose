@@ -3,33 +3,33 @@ Green='\033[0;32m'
 NC='\033[0m' # No Color
 today=$(date +'%d/%b/%Y')
 
-echo -e ${Green} "The current CPU usage is:" ${NC}
+echo -e  " ${Green} The current CPU usage is:${NC}"
 w | head -n 1
 echo
 
-echo -e ${Green} "The Average Load is:"${NC}
+echo -e  " ${Green} The Average Load is:${NC}"
 sar | awk 'NR==3; END{print}'
 echo
 
-echo -e ${Green} "The disk space is:"${NC}
+echo -e  " ${Green} The disk space is:${NC}"
 df -h
 echo
 
-echo -e ${Green} "The amount of free memory is:"${NC}
+echo -e  " ${Green} The amount of free memory is:${NC}"
 free -h
 echo
 
-echo -e ${Green} "The Top Processes using memory are:"${NC}
+echo -e  " ${Green} The Top Processes using memory are:${NC}"
 ps aux --sort=-%mem | head
 echo
-echo -e ${Green} "The Top Processes using CPU are:"${NC}
+echo -e  " ${Green} The Top Processes using CPU are:${NC}"
 ps aux --sort=-%cpu | head
 echo -e ${Green}
 
-echo -e ${Green} "The top 5 IP addresses making POST requests are:"${NC}
+echo -e  " ${Green} The top 5 IP addresses making POST requests are:${NC}"
 grep POST /home/*/access-logs/* | awk '{print $1}' | cut -d : -f2 | sort | uniq -c | sort -n | tail -n 5
 echo
-echo -e ${Green} "The top 5 IP addresses attempting to access wp-login and xmlrpc today are:"${NC}
+echo -e  " ${Green} The top 5 IP addresses attempting to access wp-login and xmlrpc today are:${NC}"
 grep $today /home/*/access-logs/* | egrep 'wp-login|xmlrpc' | cut -d : -f2 | awk '{print $1}' | sort | uniq -c | sort -n | tail -n 5
 
 read -r -p "Would you like to block these IP addresses? [y/N] " response
